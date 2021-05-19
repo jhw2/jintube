@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Form, Icon } from 'antd';
 import fileUpload from '../../../http/FileUpload';
@@ -6,7 +6,8 @@ import fileUpload from '../../../http/FileUpload';
 const DropZone = memo(()=>{
     const [filePath, setFilePath] = useState("");
     const [fileDuration, setFileDuration] = useState("");
-    const onDrop = (files)=>{
+
+    const onDrop = useCallback((files)=>{
         let formData = new FormData;
         formData.append('file', files[0]);
         fileUpload.uploadFile(formData).then(response =>{
@@ -27,7 +28,8 @@ const DropZone = memo(()=>{
                 alert('업로드 실패');
             }
         })
-    }
+    },[]);
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     return (
         <div>
