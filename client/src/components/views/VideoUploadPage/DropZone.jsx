@@ -1,12 +1,9 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Form, Icon } from 'antd';
+import { Icon } from 'antd';
 import fileUpload from '../../../http/FileUpload';
 
-const DropZone = memo(()=>{
-    const [filePath, setFilePath] = useState("");
-    const [fileDuration, setFileDuration] = useState("");
-
+const DropZone = memo(({setFilePath, thumbFilePath, setThumbFilePath, setFileDuration})=>{
     const onDrop = useCallback((files)=>{
         let formData = new FormData;
         formData.append('file', files[0]);
@@ -14,11 +11,12 @@ const DropZone = memo(()=>{
             const {data} = response;
             if(data.success){
                 const {url, filename} = data;
+                setFilePath(filename);
                 fileUpload.getThumbnail({url, filename}).then(response=>{
                     const {data} = response;
                     if(data.success){
                         const {url, fileDuration} = data;
-                        setFilePath(url);
+                        setThumbFilePath(url);
                         setFileDuration(fileDuration)
                     }else{
                         alert('썸네일 생성 실패');
@@ -28,20 +26,20 @@ const DropZone = memo(()=>{
                 alert('업로드 실패');
             }
         })
-    },[]);
+    },[setFilePath, setThumbFilePath, setFileDuration]);
+
+
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     return (
         <div>
-            <Form >
-                <div className='dropZone' {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <Icon type='plus' />
-                </div>
-                <div>
-                    <img src={`http://localhost:5000/${filePath}`} alt='' />                    
-                </div>
-            </Form>
+            <div className='dropZone' {...getRootProps()}>
+                <input {...getInputProps()} />
+                <Icon type='plus' />
+            </div>
+            <div>
+                <img src={`http://localhost:5000/${thumbFilePath}`} alt='' />                    
+            </div>
         </div>
     )
 })

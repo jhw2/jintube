@@ -7,5 +7,8 @@ class FileUpload {
   getThumbnail(params) { 
     return http.post(`/thumbnail`, params);
   }
+  uploadVideo(params) {
+    return http.post('/uploadVideo', params);
+  }
 }
 export default new FileUpload();

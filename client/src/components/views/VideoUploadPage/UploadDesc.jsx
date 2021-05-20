@@ -7,7 +7,7 @@ const UploadDesc = memo(({onChangeInput})=>{
     return (
         <div>
             <label>description</label>
-            <TextArea onChange={(e)=>onChangeInput(e, setVideoDesc)} value={videoDesc} />
+            <TextArea onChange={(e)=>onChangeInput(e, setVideoDesc)} value={videoDesc} name='description' />
         </div>
     )
 })

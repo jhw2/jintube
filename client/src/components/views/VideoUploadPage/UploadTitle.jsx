@@ -6,7 +6,7 @@ const UploadTitle = memo(({onChangeInput})=>{
     return (
         <div>
             <label>title</label>
-            <Input onChange={(e)=>onChangeInput(e, setVideoTitle)} value={videoTitle}></Input>
+            <Input onChange={(e)=>onChangeInput(e, setVideoTitle)} value={videoTitle} name='title'></Input>
         </div>
     )
 })
