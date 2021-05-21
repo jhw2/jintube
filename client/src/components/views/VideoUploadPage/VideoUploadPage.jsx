@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { Typography, message, Input, Form, Button} from 'antd';
+import { Typography, message, Form } from 'antd';
 import DropZone from './DropZone';
 import UploadTitle from './UploadTitle';
 import UploadDesc from './UploadDesc';
 import Select from './Select';
 import fileUpload from '../../../http/FileUpload';
 import { useSelector } from 'react-redux';
-import { PromiseProvider } from 'mongoose';
 
 
 const { Title } = Typography;
@@ -54,7 +53,7 @@ const VideoUploadPage = (props)=>{
                 alert('업로드실패')
             }
         });
-    },[user, filePath, fileDuration])
+    },[user, filePath, fileDuration, props.history, thumbFilePath])
 
     return(
         <div>
