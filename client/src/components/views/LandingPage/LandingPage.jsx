@@ -12,18 +12,19 @@ const LandingPage = () => {
         const cardList = [];
         console.log(cards)
         cards.forEach((card, i)=>{
-            const { writer, title, description, filepath, thumbnail, duration, views, createdAt } = card;
+            const { _id: id , writer, title, description, filepath, thumbnail, duration, views, createdAt } = card;
+            const url = '/video/' + id;
             const minutes = Math.floor(duration /60);
             const seconds = Math.floor(duration - minutes * 60);
             cardList.push(
                 <Col lg={6} md={8} xs={24} key={filepath}>
-                    <p><img src={`http://localhost:5000/${thumbnail}`} alt={title} /></p>
+                    <p><a href={url}><img src={`http://localhost:5000/${thumbnail}`} alt={title} /></a></p>
                     <div className='duration'>
                         <span>{minutes} : {seconds}</span>
                     </div>
                     <Meta avatar={ <Avatar src={writer.image} /> } title={title} description={description} />
-                    <p>{writer.name}</p>
-                    <p><span>{views} - {moment(createdAt).format('MMM Do YY')}</span></p>
+                    <p><a href={url}>{writer.name}</a></p>
+                    <p><a href={url}><span>{views} - {moment(createdAt).format('MMM Do YY')}</span></a></p>
                 </Col>
             )
         });
@@ -31,7 +32,7 @@ const LandingPage = () => {
     }
 
     useEffect(()=>{
-        fileUpload.uploadVideo().then(response=>{
+        fileUpload.getVideos().then(response=>{
             if(response.data.success){
                 drawCard(response.data.videos);
             }else{

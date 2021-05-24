@@ -10,8 +10,11 @@ class FileUpload {
   uploadVideo(params) {
     return http.post('/uploadVideo', params);
   }
-  uploadVideo() {
+  getVideos() {
     return http.get('/getVideos');
+  }
+  getVideoDetail(videoId) {
+    return http.post('/getVideoDetail', videoId);
   }
 }
 export default new FileUpload();

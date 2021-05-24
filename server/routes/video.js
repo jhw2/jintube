@@ -58,7 +58,7 @@ router.post("/thumbnail", (req, res) => {
 router.post("/uploadVideo", (req, res) => {
     const video = new Video(req.body);
     video.save((err, doc)=>{
-        if(err) return res.json({success: false, err});
+        if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true});
     });
 });
@@ -66,8 +66,16 @@ router.post("/uploadVideo", (req, res) => {
 
 router.get("/getVideos", (req, res) => {
     Video.find().populate('writer').exec((err, videos)=>{
-        if(err) return res.json({success: false, err});
+        if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true, videos});
+    });
+});
+
+router.post("/getVideoDetail", (req, res) => {
+
+    Video.findOne({"_id": req.body.videoId}).populate('writer').exec((err, videoDetail)=>{
+        if(err) return res.status(400).json({success: false, err});
+        res.status(200).json({success: true, videoDetail});
     });
 });
   
