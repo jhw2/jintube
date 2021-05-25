@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Typography, Row, Col, Card, Avatar } from 'antd';
-import fileUpload from '../../../http/FileUpload';
+import VideoApi from '../../../http/VideoApi';
 import moment from 'moment';
 
 const { Title } = Typography;
@@ -32,7 +32,7 @@ const LandingPage = () => {
     }
 
     useEffect(()=>{
-        fileUpload.getVideos().then(response=>{
+        VideoApi.getVideos().then(response=>{
             if(response.data.success){
                 drawCard(response.data.videos);
             }else{

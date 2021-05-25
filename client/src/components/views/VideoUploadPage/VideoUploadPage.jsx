@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { Typography, message, Form } from 'antd';
-import DropZone from './DropZone';
-import UploadTitle from './UploadTitle';
-import UploadDesc from './UploadDesc';
-import Select from './Select';
-import fileUpload from '../../../http/FileUpload';
+import DropZone from './Sections/DropZone';
+import UploadTitle from './Sections/UploadTitle';
+import UploadDesc from './Sections/UploadDesc';
+import Select from './Sections/Select';
+import VideoApi from '../../../http/VideoApi';
 import { useSelector } from 'react-redux';
 
 
@@ -44,7 +44,7 @@ const VideoUploadPage = (props)=>{
             duration: fileDuration, 
             thumbnail: thumbFilePath
         };
-        fileUpload.uploadVideo(params).then(response=>{
+        VideoApi.uploadVideo(params).then(response=>{
             if(response.data.success){
                 message.success('업로드 성공');
                 setTimeout(()=>{props.history.push('/')}, 2000)

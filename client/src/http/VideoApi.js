@@ -1,0 +1,20 @@
+import http from "./http-common-video";
+class FileUpload {
+  uploadFile(formData) { 
+    const config= {header: {"Content-type": "multipart/form-data"}}
+    return http.post(`/uploadfiles`, formData, config);
+  }
+  getThumbnail(params) { 
+    return http.post(`/thumbnail`, params);
+  }
+  uploadVideo(params) {
+    return http.post('/uploadVideo', params);
+  }
+  getVideos() {
+    return http.get('/getVideos');
+  }
+  getVideoDetail(videoId) {
+    return http.post('/getVideoDetail', videoId);
+  }
+}
+export default new FileUpload();

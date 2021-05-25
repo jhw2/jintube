@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import fileUpload from '../../../../http/FileUpload';
+import VideoApi from '../../../../http/VideoApi';
 
 const SideVideo = (props)=>{
     const [sideList, setSideList] = useState([]);
@@ -12,7 +12,7 @@ const SideVideo = (props)=>{
             const minutes = Math.floor(duration /60);
             const seconds = Math.floor(duration - minutes * 60);
             return (
-                <li>
+                <li key={filepath}>
                     <div className='img'>
                         <a href={url}><img src={'http://localhost:5000/'+thumbnail} alt='' /></a>
                         <div className='duration'>
@@ -32,7 +32,7 @@ const SideVideo = (props)=>{
         setSideList(sideList)
     }
     useEffect(()=>{
-        fileUpload.getVideos().then(response=>{
+        VideoApi.getVideos().then(response=>{
             if(response.data.success){
                 drawSideList(response.data.videos);
             }else{
