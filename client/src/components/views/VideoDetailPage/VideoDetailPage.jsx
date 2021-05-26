@@ -1,23 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Avatar, List } from 'antd';
-import VideoApi from '../../../http/VideoApi';
 import SideVideo from './Sections/SideVideo';
 import Subscribe from './Sections/Subscribe';
+import Comment from './Sections/Comment';
+import VideoApi from '../../../http/VideoApi';
+import CommentApi from '../../../http/CommentApi';
 
 const VideoDetailPage = (props)=>{
     const videoId = props.match.params.videoId;
     const [videoDetail, setVideoDetail] = useState({}); 
+    const [CommentList, setCommentList] = useState([]); 
     const { title, description, filepath, writer } = videoDetail;
 
     const subscribeBtn = writer && writer._id === localStorage.getItem('userId') ? '' : <Subscribe history={props.history} userTo={writer && writer._id} userFrom={localStorage.getItem('userId')}  />;
     
+    const refresh = (comment)=>{
+        const newComment = [...CommentList, ...comment];
+        setCommentList(newComment);
+    }
+
     useEffect(()=>{
         VideoApi.getVideoDetail({videoId}).then(response=>{
-            if(response.data.success){
-                setVideoDetail(response.data.videoDetail);
-            }else{
+            if(!response.data.success){
                 alert('정보 조회 실패')
+                return false;
             }
+            setVideoDetail(response.data.videoDetail);
+        });
+        CommentApi.getComment({postId: videoId}).then(response=>{
+            if(!response.data.success){
+                alert('댓글 조회 실패')
+                return false;
+            }
+            setCommentList(response.data.commentList);
         });
     },[videoId]);
 
@@ -32,6 +47,9 @@ const VideoDetailPage = (props)=>{
                     <List.Item actions={[subscribeBtn]} >
                         <List.Item.Meta avatar={ writer && <Avatar src={writer.image} /> } title={title} description={description} />
                     </List.Item>
+
+                    <Comment CommentList={CommentList} videoId={videoId} refresh={refresh} />
+
                 </div>
             </Col>
             <Col lg={6} xs={24}>

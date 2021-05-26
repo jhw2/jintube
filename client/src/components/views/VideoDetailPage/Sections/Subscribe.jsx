@@ -6,7 +6,6 @@ const Subscribe = memo( ({history, userTo, userFrom})=>{
     const [subscribed, setSubscribed] = useState(false);
 
     const onSubscribe = useCallback(()=>{
-        
         if(!userFrom){
             alert('로그인 후 구독가능합니다.');
             history.push("/login");
@@ -31,7 +30,7 @@ const Subscribe = memo( ({history, userTo, userFrom})=>{
                 setSubscribed(true);
             })
         }
-    },[subscribed, subscribeCount, userTo, userFrom])
+    },[subscribed, subscribeCount, userTo, userFrom, history])
 
     useEffect(()=>{
         SubscribeApi.getSubscribeCount({userTo}).then(response=>{
