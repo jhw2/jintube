@@ -1,12 +1,17 @@
 import React, { useEffect, useState, memo, useCallback } from 'react';
 import SubscribeApi from '../../../../http/SubscribeApi';
 
-const Subscribe = memo( ({userTo, userFrom})=>{
+const Subscribe = memo( ({history, userTo, userFrom})=>{
     const [subscribeCount, setSubscribeCount] = useState(0);
     const [subscribed, setSubscribed] = useState(false);
 
-
     const onSubscribe = useCallback(()=>{
+        
+        if(!userFrom){
+            alert('로그인 후 구독가능합니다.');
+            history.push("/login");
+            return false;
+        }
         if(subscribed){
             SubscribeApi.unSubscribed({userTo, userFrom}).then(response=>{
                 if(!response.data.success){

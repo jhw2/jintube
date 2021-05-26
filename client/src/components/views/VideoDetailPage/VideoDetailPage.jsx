@@ -8,6 +8,8 @@ const VideoDetailPage = (props)=>{
     const videoId = props.match.params.videoId;
     const [videoDetail, setVideoDetail] = useState({}); 
     const { title, description, filepath, writer } = videoDetail;
+
+    const subscribeBtn = writer && writer._id === localStorage.getItem('userId') ? '' : <Subscribe history={props.history} userTo={writer && writer._id} userFrom={localStorage.getItem('userId')}  />;
     
     useEffect(()=>{
         VideoApi.getVideoDetail({videoId}).then(response=>{
@@ -27,7 +29,7 @@ const VideoDetailPage = (props)=>{
                 </div>
                 <div>
                    
-                    <List.Item actions={[<Subscribe userTo={writer && writer._id} userForm={localStorage.getItem('userId')} />]} >
+                    <List.Item actions={[subscribeBtn]} >
                         <List.Item.Meta avatar={ writer && <Avatar src={writer.image} /> } title={title} description={description} />
                     </List.Item>
                 </div>
