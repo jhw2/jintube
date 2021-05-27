@@ -19,7 +19,7 @@ router.post("/saveComment", (req, res) => {
 })
 
 router.post("/getComment", (req, res) => {
-    Comment.find({'postId': req.body.postId}).populate('writer').exec((err, commentList)=>{
+    Comment.find({'postId': req.body.postId, replyTo: req.body.replyTo}).populate('writer').exec((err, commentList)=>{
         if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true, commentList});
     })

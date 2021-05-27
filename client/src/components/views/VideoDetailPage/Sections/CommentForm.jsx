@@ -2,7 +2,8 @@ import React, { useState, memo } from 'react';
 import { useSelector } from 'react-redux';
 import CommentApi from '../../../../http/CommentApi';
 
-const Comment = memo(({videoId, addClass, replyTo, refresh})=>{
+const Comment = memo(({videoId, addClass = '', replyTo, refresh})=>{
+    //console.log(replyTo)
     const user = useSelector(state=>state.user);
     const [comment, setComment] = useState('');
 

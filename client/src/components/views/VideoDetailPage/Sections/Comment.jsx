@@ -1,17 +1,16 @@
-import React, { useState, memo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { memo } from 'react';
 import CommentForm from './CommentForm';
 import SingleComment from './SingleComment';
-import CommentApi from '../../../../http/CommentApi';
 
 const Comment = memo(({CommentList, videoId, refresh})=>{ 
-    console.log(CommentList.length, videoId)
     return(
-        <div>
+        <div className='comment-list'>
             <h6 className='line-title'>Reply</h6>
             {CommentList.map((comment, i)=>{
                 if(!comment.replyTo){
                     return <SingleComment key={comment._id} comment={comment} videoId={videoId} refresh={refresh} />
+                }else{
+                    return ''
                 }
             })}
             <CommentForm videoId={videoId} refresh={refresh} />
