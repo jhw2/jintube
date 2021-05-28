@@ -14,7 +14,6 @@ router.post("/saveComment", (req, res) => {
             if(err) return res.status(400).json({success: false, err});
             res.status(200).json({success: true, result});
         })
-        
     })
 })
 
@@ -23,6 +22,19 @@ router.post("/getComment", (req, res) => {
         if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true, commentList});
     })
+})
+
+router.post("/removeComment", (req, res) => {
+    Comment.findOneAndDelete({'_id': req.body.id}).exec((err, doc)=>{
+        if(err) return res.status(400).json({success: false, err});
+        Comment.deleteMany({'replyTo': req.body.id}).exec((err, doc)=>{
+            if(err) return res.status(400).json({success: false, err});
+            res.status(200).json({success: true});
+        })
+    })
+
+    
+    
 })
 
 module.exports = router;

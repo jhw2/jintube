@@ -58,3 +58,4 @@ input.error {
 .reply button{border: 1px solid #ccc;height: 80px;min-width: 80px;}
 .singleComment{padding-left: 30px;border-bottom: 1px solid #ddd;}
 .comment-list>.singleComment{padding-left: 0;}
+.commentNum{padding-left: 35px;cursor: pointer;}

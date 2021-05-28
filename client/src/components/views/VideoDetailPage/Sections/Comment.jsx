@@ -2,13 +2,13 @@ import React, { memo } from 'react';
 import CommentForm from './CommentForm';
 import SingleComment from './SingleComment';
 
-const Comment = memo(({CommentList, videoId, refresh})=>{ 
+const Comment = memo(({CommentList, videoId, refresh, delComment})=>{ 
     return(
         <div className='comment-list'>
             <h6 className='line-title'>Reply</h6>
             {CommentList.map((comment, i)=>{
                 if(!comment.replyTo){
-                    return <SingleComment key={comment._id} comment={comment} videoId={videoId} refresh={refresh} />
+                    return <SingleComment key={comment._id} comment={comment} videoId={videoId} refresh={refresh} delComment={delComment} />
                 }else{
                     return ''
                 }

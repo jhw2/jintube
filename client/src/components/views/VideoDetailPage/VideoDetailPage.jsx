@@ -11,12 +11,15 @@ const VideoDetailPage = (props)=>{
     const [videoDetail, setVideoDetail] = useState({}); 
     const [CommentList, setCommentList] = useState([]); 
     const { title, description, filepath, writer } = videoDetail;
-    //console.log(writer)
 
     const subscribeBtn = writer && writer._id === localStorage.getItem('userId') ? '' : <Subscribe history={props.history} userTo={writer && writer._id} userFrom={localStorage.getItem('userId')}  />;
     
     const refresh = (comment)=>{
         const newComment = [...CommentList, ...comment];
+        setCommentList(newComment);
+    }
+    const delComment = (commentId)=>{
+        const newComment = CommentList.filter(comment=>comment._id !== commentId);
         setCommentList(newComment);
     }
 
@@ -49,7 +52,7 @@ const VideoDetailPage = (props)=>{
                         <List.Item.Meta avatar={ writer && <Avatar src={writer.image} /> } title={title} description={description} />
                     </List.Item>
 
-                    <Comment CommentList={CommentList} videoId={videoId} refresh={refresh} />
+                    <Comment CommentList={CommentList} videoId={videoId} refresh={refresh} delComment={delComment} />
 
                 </div>
             </Col>
