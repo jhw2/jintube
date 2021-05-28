@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CommentSchema = Schema({
-    wirter: {
+    writer: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },

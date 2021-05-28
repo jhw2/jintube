@@ -34,6 +34,7 @@ const LandingPage = () => {
     useEffect(()=>{
         VideoApi.getVideos().then(response=>{
             if(response.data.success){
+                console.log(response.data)
                 drawCard(response.data.videos);
             }else{
                 alert('데이터 조회 실패');

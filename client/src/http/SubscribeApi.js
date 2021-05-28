@@ -1,7 +1,7 @@
 import http from "./http-common-subscribe";
 class SubscribeApi {
   getSubscribeCount(userToId) { 
-    return http.get(`/getSubscribeCount`, userToId);
+    return http.post(`/getSubscribeCount`, userToId);
   }
   getSubscribed(usersId) { 
     return http.post(`/getSubscribed`, usersId);

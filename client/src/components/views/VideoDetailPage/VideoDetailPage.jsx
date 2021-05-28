@@ -11,6 +11,7 @@ const VideoDetailPage = (props)=>{
     const [videoDetail, setVideoDetail] = useState({}); 
     const [CommentList, setCommentList] = useState([]); 
     const { title, description, filepath, writer } = videoDetail;
+    //console.log(writer)
 
     const subscribeBtn = writer && writer._id === localStorage.getItem('userId') ? '' : <Subscribe history={props.history} userTo={writer && writer._id} userFrom={localStorage.getItem('userId')}  />;
     

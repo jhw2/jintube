@@ -31,7 +31,7 @@ const videoSchema = Schema({
     },
     thumbnail: {
         type: String
-    },
+    }
 }, { timestamp: true });
 
 

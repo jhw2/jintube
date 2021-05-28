@@ -33,19 +33,20 @@ const Subscribe = memo( ({history, userTo, userFrom})=>{
     },[subscribed, subscribeCount, userTo, userFrom, history])
 
     useEffect(()=>{
+        console.log(userTo, userFrom)
         SubscribeApi.getSubscribeCount({userTo}).then(response=>{
             if(!response.data.success){
                 alert('구독수 조회 실패');
                 return false;
             }
             setSubscribeCount(response.data.subscribeCount);
-            setSubscribed(response.data.subscribed);
         });
         SubscribeApi.getSubscribed({userTo, userFrom}).then(response=>{
             if(!response.data.success){
                 alert('구독 조회 실패');
                 return false;
             }
+            setSubscribed(response.data.subscribed);
         });
     },[userTo, userFrom]);
     return(

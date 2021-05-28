@@ -5,13 +5,13 @@ import ReplyComment from './ReplyComment';
 import CommentApi from '../../../../http/CommentApi';
 
 const SingleComment = memo(({comment, videoId})=>{
-    const [openReply, setOpenReply] = useState(false);
+    const [openReplyForm, setOpenReplyForm] = useState(false);
     const [CommentList, setCommentList] = useState([]); 
     const { _id : replyTo, writer, content } = comment;
 
     const onClickReplyOpen = useCallback(()=>{
-        setOpenReply(!openReply);
-    }, [openReply]);
+        setOpenReplyForm(!openReplyForm);
+    }, [openReplyForm]);
 
     const refresh = useCallback((comment)=>{
         const newComment = [...CommentList, ...comment];
@@ -32,7 +32,7 @@ const SingleComment = memo(({comment, videoId})=>{
     return(
         <div className='singleComment'>
             <Comment actions={actions} author={writer && writer.name} avatar={<Avatar src={writer && writer.image} alt={writer && writer.name} />} content={content} />
-            {openReply && <CommentForm replyTo={replyTo} addClass='reReply' videoId={videoId} refresh={refresh} />}
+            {openReplyForm && <CommentForm replyTo={replyTo} addClass='reReply' videoId={videoId} refresh={refresh} />}
             <ReplyComment CommentList={CommentList} videoId={videoId} replyTo={replyTo}></ReplyComment>
         </div>
     )

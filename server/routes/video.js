@@ -50,8 +50,8 @@ router.post("/thumbnail", (req, res) => {
     }).screenshot({
         count: 3,
         folder: 'uploads/thumbnails',
-        size: '320x240',
-        filenames: 'thumbnail-%b.png'
+        size: '320x200',
+        filename: "thumbnail-%b.png",
     }) 
 });
 

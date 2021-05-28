@@ -5,11 +5,10 @@ const { Subscriber } = require("../models/Subscriber");
 //=================================
 //          subscribe
 //=================================
-router.get("/getSubscribeCount", (req, res) => {
+router.post("/getSubscribeCount", (req, res) => {
     Subscriber.find({ 'userTo': req.body.userTo }).exec((err, subscribe)=>{
         if(err){return res.status(400).json({success: false, err});}
-
-        return res.status(200).json({success: true, subscribeCount: subscribe.length, subscribed: subscribe.length > 0});
+        return res.status(200).json({success: true, subscribeCount: subscribe.length});
     });
 });
 
