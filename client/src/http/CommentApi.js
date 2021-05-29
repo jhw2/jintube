@@ -6,6 +6,9 @@ class CommentApi {
   getComment(postId) { 
     return http.post(`/getComment`, postId);
   }
+  updateComment(params) { 
+    return http.post(`/updateComment`, params);
+  }
   deleteComment(id) { 
     return http.post(`/removeComment`, id);
   }

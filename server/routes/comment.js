@@ -24,17 +24,23 @@ router.post("/getComment", (req, res) => {
     })
 })
 
+router.post("/updateComment", (req, res) => {
+    Comment.updateOne({'_id': req.body.id}, {'content': req.body.content}, (err, doc)=>{
+        if(err) return res.status(400).json({success: false, err});
+        res.status(200).json({success: true, result: req.body.content});
+    })
+});
+
+
 router.post("/removeComment", (req, res) => {
     Comment.findOneAndDelete({'_id': req.body.id}).exec((err, doc)=>{
         if(err) return res.status(400).json({success: false, err});
+        // 자식 코멘트 삭제
         Comment.deleteMany({'replyTo': req.body.id}).exec((err, doc)=>{
             if(err) return res.status(400).json({success: false, err});
             res.status(200).json({success: true});
         })
     })
-
-    
-    
 })
 
 module.exports = router;
