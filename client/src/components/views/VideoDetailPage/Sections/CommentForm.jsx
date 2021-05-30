@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { useSelector } from 'react-redux';
 
 const Comment = memo(({onSubmit})=>{
@@ -6,14 +6,14 @@ const Comment = memo(({onSubmit})=>{
     const [comment, setComment] = useState('');
     const disabled = user.userData && user.userData._id ? '' : 'disabled';
 
-    const handleClick = (e)=>{
+    const handleClick = useCallback((e)=>{
         setComment(e.target.value);
-    }
-    const onSubmitHandle = (e)=>{
+    },[]);
+    const onSubmitHandle = useCallback((e)=>{
         e.preventDefault();
         onSubmit(e.target.comment.value);
         setComment('');
-    }
+    },[onSubmit]);
     return(
         <div className='reply reReply'>
             <form onSubmit={onSubmitHandle}>

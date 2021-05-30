@@ -70,10 +70,10 @@ const SingleComment = memo(({comment, videoId, delComment})=>{
             });
         }
     },[replyTo, delComment]);
-    const reDelComment = (commentId)=>{
+    const reDelComment = useCallback((commentId)=>{
         const newComment = commentList.filter(comment=>comment._id !== commentId);
         setCommentList(newComment);
-    }
+    },[commentList])
 
     useEffect(()=>{
         CommentApi.getComment({postId: videoId, replyTo}).then(response=>{
