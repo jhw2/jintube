@@ -23,7 +23,7 @@ router.post("/unSubscribed", (req, res) => {
     Subscriber.findOneAndDelete({userTo: req.body.userTo, userFrom: req.body.userFrom}).exec((err, doc)=>{
         if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true});
-    })
+    });
 })
 
 router.post("/onSubscribed", (req, res) => {

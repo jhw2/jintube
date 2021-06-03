@@ -3,6 +3,7 @@ import { Row, Col, Avatar, List } from 'antd';
 import SideVideo from './Sections/SideVideo';
 import Subscribe from './Sections/Subscribe';
 import Comment from './Sections/Comment';
+import LikeDislike from './Sections/LikeDislike';
 import VideoApi from '../../../http/VideoApi';
 import CommentApi from '../../../http/CommentApi';
 
@@ -48,7 +49,7 @@ const VideoDetailPage = (props)=>{
                 </div>
                 <div>
                    
-                    <List.Item actions={[subscribeBtn]} >
+                    <List.Item actions={[<LikeDislike videoId={videoId} userId={localStorage.getItem('userId')} history={props.history} />, subscribeBtn]} >
                         <List.Item.Meta avatar={ writer && <Avatar src={writer.image} /> } title={title} description={description} />
                     </List.Item>
 
