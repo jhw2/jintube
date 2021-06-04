@@ -6,7 +6,7 @@ import { USER_SERVER } from '../../../Config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
-function RightMenu(props) {
+const RightMenu = (props)=> {
   const user = useSelector(state => state.user)
 
   const logoutHandler = () => {
