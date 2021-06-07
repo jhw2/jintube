@@ -37,6 +37,11 @@ input.error {
   height: 5px;
   margin-top: -12px;
 }
+.cont{padding: 30px;}
+
+.thumbnail .img-wrap{position: relative;padding-top: 62.5%;}
+.thumbnail .img-wrap img{position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+.thumbnail .img-wrap .duration{max-width: 100%;position: absolute;bottom:0;right: 0;background-color: rgba(0, 0, 0, 0.7);padding: 3px 6px;color: #fff;font-size: 12px;}
 
 .dropZone{display: flex;justify-content: center;align-items: center;font-size: 3rem;border: 1px solid #ccc;max-width: 300px;height: 300px;margin-bottom: 15px;}
 .dropZone input{max-width: 100%;}
