@@ -1,38 +1,43 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Icon } from 'antd';
 import VideoApi from '../../../../http/VideoApi';
+import Loading from './Loading';
 
 const DropZone = memo(({setFilePath, thumbFilePath, setThumbFilePath, setFileDuration})=>{
+    const [loading, setLoading] = useState(false);
+
     const onDrop = useCallback((files)=>{
         let formData = new FormData();
         formData.append('file', files[0]);
+        
+        setLoading(true);
+
         VideoApi.uploadFile(formData).then(response =>{
             const {data} = response;
-            if(data.success){
-                const {url, filename} = data;
-                setFilePath(filename);
-                VideoApi.getThumbnail({url, filename}).then(response=>{
-                    const {data} = response;
-                    if(data.success){
-                        const {url, fileDuration} = data;
-                        setThumbFilePath(url);
-                        setFileDuration(fileDuration)
-                    }else{
-                        alert('썸네일 생성 실패');
-                    }
-                });
-            }else{
+            if(!data.success){
                 alert('업로드 실패');
             }
+            const {url, filename} = data;
+            setFilePath(filename);
+            VideoApi.getThumbnail({url, filename}).then(response=>{
+                const {data} = response;
+                if(!data.success){
+                    alert('썸네일 생성 실패');
+                    return false;
+                }
+                const {url, fileDuration} = data;
+                setThumbFilePath(url);
+                setFileDuration(fileDuration);
+                setLoading(false);
+            });
         })
     },[setFilePath, setThumbFilePath, setFileDuration]);
 
-
-
     const {getRootProps, getInputProps} = useDropzone({onDrop});
     return (
-        <div>
+        <div className='uploadForm'>
+            <Loading isVisible={loading} />
             <div className='dropZone' {...getRootProps()}>
                 <input {...getInputProps()} />
                 <Icon type='plus' />

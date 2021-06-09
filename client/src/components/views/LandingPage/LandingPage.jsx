@@ -43,7 +43,7 @@ const LandingPage = () => {
 
     
     return (
-        <div className='cont'>
+        <div>
             <Title level={2}>Recommended</Title>
             <Row gutter={[32, 16]}>
                 {renderCard}

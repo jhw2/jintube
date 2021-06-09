@@ -57,7 +57,7 @@ const VideoUploadPage = (props)=>{
 
     return(
         <div>
-            <div style={{textAlign: 'center', margin: '20px 0'}}>
+            <div>
                 <Title level={2}>Upload Video</Title>
             </div>
             <Form onSubmit={onSubmit}>
