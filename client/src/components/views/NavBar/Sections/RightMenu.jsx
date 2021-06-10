@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const RightMenu = (props)=> {
   const user = useSelector(state => state.user);
 
-  if (user.userData && !user.userData.isAuth && !localStorage.getItem('userId')) {
+  if (user.userData && !user.userData.isAuth && localStorage.getItem('userId')) {
     localStorage.removeItem('userId');
   }
 
