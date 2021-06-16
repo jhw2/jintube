@@ -45,7 +45,7 @@ const VideoDetailPage = (props)=>{
         <Row gutter={[16, 16]}>
             <Col lg={18} xs={24}>
                 <div>
-                    <video src={filepath && 'http://localhost:5000/uploads/'+filepath} type="video/mp4" controls/>
+                    <video src={filepath && 'http://192.168.219.109:5000/uploads/'+filepath} type="video/mp4" controls/>
                 </div>
                 <div>
                    
@@ -53,8 +53,8 @@ const VideoDetailPage = (props)=>{
                         <List.Item.Meta avatar={ writer && <Avatar src={writer.image} /> } title={title} description={description} />
                     </List.Item>
 
-                    <Comment CommentList={CommentList} videoId={videoId} refresh={refresh} delComment={delComment} />
-
+                    <Comment CommentList={CommentList} videoId={videoId} refresh={refresh} delComment={delComment} history={props.history} />
+                    
                 </div>
             </Col>
             <Col lg={6} xs={24}>

@@ -4,7 +4,7 @@ import CommentForm from './CommentForm';
 import SingleComment from './SingleComment';
 import CommentApi from '../../../../http/CommentApi';
 
-const Comment = memo(({CommentList, videoId, refresh, delComment})=>{ 
+const Comment = memo(({CommentList, videoId, refresh, delComment, history})=>{ 
     const user = useSelector(state=>state.user);
     const insertComment = (content)=>{
         const params ={writer: user.userData._id, postId: videoId, content};
@@ -21,7 +21,14 @@ const Comment = memo(({CommentList, videoId, refresh, delComment})=>{
             <h6 className='line-title'>Reply</h6>
             {CommentList.map((comment, i)=>{
                 if(!comment.replyTo){
-                    return <SingleComment key={comment._id} comment={comment} videoId={videoId} refresh={refresh} delComment={delComment} />
+                    return <SingleComment 
+                                key={comment._id} 
+                                comment={comment} 
+                                videoId={videoId} 
+                                refresh={refresh} 
+                                delComment={delComment} 
+                                history={history}
+                            />
                 }else{
                     return ''
                 }

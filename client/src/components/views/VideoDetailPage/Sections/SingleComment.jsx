@@ -7,7 +7,7 @@ import ReplyComment from './ReplyComment';
 import LikeDislike from './LikeDislike';
 import CommentApi from '../../../../http/CommentApi';
 
-const SingleComment = memo(({comment, videoId, delComment})=>{
+const SingleComment = memo(({comment, videoId, delComment, history})=>{
     const user = useSelector(state=>state.user);
     const { _id : replyTo, writer, content } = comment;
 
@@ -88,7 +88,7 @@ const SingleComment = memo(({comment, videoId, delComment})=>{
     
     const updateButton = currentUserId === writer._id ? <span className='update' onClick={updateCommentOpen}>수정</span> : null;
     const deleteButton = currentUserId === writer._id ? <span className='del' onClick={deleteComment}>삭제</span> : null;
-    const actions = [<LikeDislike commentId={replyTo} userId={currentUserId} />, <span onClick={onClickReplyFormOpen} key='comment-basic-reply-to'>Reply to</span>, updateButton, deleteButton];
+    const actions = [<LikeDislike commentId={replyTo} userId={currentUserId} history={history} />, <span onClick={onClickReplyFormOpen} key='comment-basic-reply-to'>Reply to</span>, updateButton, deleteButton];
     return(
         <div className='singleComment'>
             <Comment actions={actions} author={writer && writer.name} avatar={<Avatar src={writer && writer.image} alt={writer && writer.name} />} content={contentTxt} />
