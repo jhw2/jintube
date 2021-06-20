@@ -10,7 +10,6 @@ const LandingPage = () => {
 
     const drawCard = (cards)=>{
         const cardList = [];
-        console.log(cards)
         cards.forEach((card, i)=>{
             const { _id: id , writer, title, description, filepath, thumbnail, duration, views, createdAt } = card;
             const url = '/video/' + id;
