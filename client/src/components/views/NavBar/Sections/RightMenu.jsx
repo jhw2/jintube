@@ -9,13 +9,10 @@ import { useSelector } from "react-redux";
 const RightMenu = (props)=> {
   const user = useSelector(state => state.user);
 
-  if (!user.loginSucces && user.userData && !user.userData.isAuth && localStorage.getItem('userId')) {
-    localStorage.removeItem('userId');
-  }
-
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
+        localStorage.removeItem('userId');
         props.history.push("/login");
       } else {
         alert('Log Out Failed')

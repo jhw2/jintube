@@ -12,6 +12,12 @@ export default function (SpecificComponent, option, adminRoute = null) {
         useEffect(() => {
             //To know my current status, send Auth request 
             dispatch(auth()).then(response => {
+
+                //로그인 유효기간(1일) 만료시 localstorage userId 제거
+                if (!response.payload.isAuth && localStorage.getItem('userId')) {
+                    localStorage.removeItem('userId');
+                }
+               
                 //Not Loggined in Status 
                 if (!response.payload.isAuth) {
                     if (option) {
