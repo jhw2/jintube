@@ -14,7 +14,7 @@ import VideoDetailPage from "./views/VideoDetailPage/VideoDetailPage"
 //true   only logged in user can go inside
 //false  logged in user can't go inside
 
-function App() {
+const App = ()=> {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
       <NavBar />

@@ -4,7 +4,7 @@ import { auth } from '../_actions/user_actions';
 import { useSelector, useDispatch } from "react-redux";
 
 export default function (SpecificComponent, option, adminRoute = null) {
-    function AuthenticationCheck(props) {
+    const AuthenticationCheck = (props)=> {
 
         let user = useSelector(state => state.user);
         const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
             //To know my current status, send Auth request 
             dispatch(auth()).then(response => {
 
-                //로그인 유효기간(1일) 만료시 localstorage userId 제거
+                //로그인 유효기간(1일) 만료로 로그아웃 시 localstorage userId 제거
                 if (!response.payload.isAuth && localStorage.getItem('userId')) {
                     localStorage.removeItem('userId');
                 }
