@@ -21,9 +21,9 @@ const LandingPage = () => {
                         <a href={url}><img src={`http://localhost:5000/${thumbnail}`} alt={title} /></a>
                         <span className='duration'>{minutes} : {seconds}</span>
                     </p>
-                    <Meta avatar={ <Avatar src={writer.image} /> } title={title} description={description} />
-                    <p><a href={url}>{writer.name}</a></p>
-                    <p><a href={url}><span>{views} - {moment(createdAt).format('MMM Do YY')}</span></a></p>
+                    <a href={url}><Meta avatar={ <Avatar src={writer.image} /> } title={title} description={description} /></a>
+                    <p className='nm'><a href={url}>{writer.name}</a></p>
+                    <p className='views'><a href={url}><span>조회: {views} · {moment(createdAt).format('MMM Do YY')}</span></a></p>
                 </Col>
             )
         });

@@ -19,6 +19,7 @@ body {
   background-color: #fff;
 }
 
+body a{color: inherit;}
 .app {
   flex-direction: column;
   display: flex;
@@ -43,6 +44,9 @@ input.error {
 .thumbnail .img-wrap{position: relative;padding-top: 62.5%;}
 .thumbnail .img-wrap img{position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
 .thumbnail .img-wrap .duration{max-width: 100%;position: absolute;bottom:0;right: 0;background-color: rgba(0, 0, 0, 0.7);padding: 3px 6px;color: #fff;font-size: 12px;}
+.thumbnail .ant-card-meta-detail > .ant-card-meta-description{margin-top: -8px;font-size: 12px;}
+.thumbnail .nm{margin-top: -8px;font-size: 11px;}
+.thumbnail .views{margin-top: -15px;font-size: 13px;padding-left: 47px;}
 
 .uploadForm{display: flex;}
 .uploadForm img{height: 200px;}
