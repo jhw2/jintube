@@ -45,7 +45,7 @@ const VideoDetailPage = (props)=>{
         <Row gutter={[16, 16]}>
             <Col lg={18} xs={24}>
                 <div>
-                    <video src={filepath && 'http://192.168.219.109:5000/uploads/'+filepath} type="video/mp4" controls/>
+                    <video src={filepath && 'http://localhost:5000/uploads/'+filepath} type="video/mp4" controls/>
                 </div>
                 <div>
                    

@@ -5,6 +5,9 @@ import moment from 'moment';
 
 const { Title } = Typography;
 const { Meta } = Card;
+const zeroFill = (num)=>{
+    return Number(num) < 10 ? '0'+num : num;
+}
 const LandingPage = () => {
     const [renderCard, setRenderCard] = useState('');
 
@@ -13,8 +16,8 @@ const LandingPage = () => {
         cards.forEach((card, i)=>{
             const { _id: id , writer, title, description, filepath, thumbnail, duration, views, createdAt } = card;
             const url = '/video/' + id;
-            const minutes = Math.floor(duration /60);
-            const seconds = Math.floor(duration - minutes * 60);
+            const minutes = zeroFill(Math.floor(duration /60));
+            const seconds = zeroFill(Math.floor(duration - minutes * 60));
             cardList.push(
                 <Col className='thumbnail' lg={6} md={8} xs={24} key={filepath}>
                     <p className='img-wrap'>
