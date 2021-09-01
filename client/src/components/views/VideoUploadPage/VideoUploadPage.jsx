@@ -34,6 +34,11 @@ const VideoUploadPage = (props)=>{
         e.preventDefault();
         const { title, description, privacy, category } = e.target;
 
+        if(!filePath){
+            alert('동영상을 업로드해주세요');
+            return false;
+        }
+        
         const params = {
             writer: user.userData._id, 
             title: title.value, 
@@ -62,10 +67,12 @@ const VideoUploadPage = (props)=>{
             </div>
             <Form onSubmit={onSubmit}>
                 <DropZone setFilePath={setFilePath} thumbFilePath={thumbFilePath} setThumbFilePath={setThumbFilePath} setFileDuration={setFileDuration}></DropZone>
+                <p className='mb20 required'>※ .mp4동영상만 업로드 가능합니다.</p>
+
                 <UploadTitle onChangeInput={onChangeInput}></UploadTitle>
                 <UploadDesc onChangeInput={onChangeInput}></UploadDesc>
 
-                <div>
+                <div className='mb10'>
                     <Select onChangeInput={onChangeInput} options={privateOptions} defaultValue={0} name='privacy'></Select>
                     <Select onChangeInput={onChangeInput} options={categoryOptions} defaultValue={"Film & Animation"} name='category'></Select>
                 </div>

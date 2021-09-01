@@ -22,8 +22,10 @@ const DropZone = memo(({setFilePath, thumbFilePath, setThumbFilePath, setFileDur
             setFilePath(filename);
             VideoApi.getThumbnail({url, filename}).then(response=>{
                 const {data} = response;
+                console.log()
                 if(!data.success){
                     alert('썸네일 생성 실패');
+                    setLoading(false);
                     return false;
                 }
                 const {url, fileDuration} = data;
@@ -39,7 +41,7 @@ const DropZone = memo(({setFilePath, thumbFilePath, setThumbFilePath, setFileDur
         <div className='uploadForm'>
             <Loading isVisible={loading} />
             <div className='dropZone' {...getRootProps()}>
-                <input {...getInputProps()} />
+                <input {...getInputProps()} accept=".mp4" />
                 <Icon type='plus' />
             </div>
             <div>

@@ -4,9 +4,9 @@ import { Input } from 'antd';
 const UploadTitle = memo(({onChangeInput})=>{
     const [videoTitle, setVideoTitle] = useState("");
     return (
-        <div>
-            <label>title</label>
-            <Input onChange={(e)=>onChangeInput(e, setVideoTitle)} value={videoTitle} name='title'></Input>
+        <div className='mb5'>
+            <label>Title</label>
+            <Input onChange={(e)=>onChangeInput(e, setVideoTitle)} value={videoTitle} name='title' required></Input>
         </div>
     )
 })

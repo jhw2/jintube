@@ -17,6 +17,8 @@
   display: inline-block;
   font-size: 20px;
   padding: 19px 20px;
+  color: #1067b7;
+  text-transform: uppercase;
 }
 
 .menu__container .ant-menu-item {

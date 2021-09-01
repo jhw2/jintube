@@ -5,9 +5,9 @@ const { TextArea } = Input;
 const UploadDesc = memo(({onChangeInput})=>{
     const [videoDesc, setVideoDesc] = useState("");
     return (
-        <div>
-            <label>description</label>
-            <TextArea onChange={(e)=>onChangeInput(e, setVideoDesc)} value={videoDesc} name='description' />
+        <div className='mb5'>
+            <label>Description</label>
+            <TextArea onChange={(e)=>onChangeInput(e, setVideoDesc)} value={videoDesc} name='description' required/>
         </div>
     )
 })
