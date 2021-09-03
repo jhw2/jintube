@@ -71,13 +71,13 @@ const LikeDislike = memo(({videoId, commentId, userId, history})=>{
 
     return(
         <div>
-           <span key='comment-basic-like'>
+           <span className='ic-like' key='comment-basic-like'>
                 <Tooltip title='Like'>
                     <Icon type='like' theme={likeAction} onClick={onLiked}></Icon>
                 </Tooltip>
                 <span>{likes}</span>
            </span>
-           <span key='comment-basic-dislike'>
+           <span className='ic-dislike' key='comment-basic-dislike'>
                 <Tooltip title='Dislike'>
                     <Icon type='dislike' theme={disLikeAction} onClick={onDisLiked}></Icon>
                 </Tooltip>
