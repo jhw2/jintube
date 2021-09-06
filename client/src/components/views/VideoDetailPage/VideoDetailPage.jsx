@@ -1,3 +1,4 @@
+import './style.css';
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Avatar, List } from 'antd';
 import SideVideo from './Sections/SideVideo';

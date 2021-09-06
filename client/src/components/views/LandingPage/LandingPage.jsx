@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import './style.css';
+import React, { useEffect, useState } from 'react';
 import { Typography, Row, Col, Card, Avatar } from 'antd';
 import VideoApi from '../../../http/VideoApi';
 import moment from 'moment';

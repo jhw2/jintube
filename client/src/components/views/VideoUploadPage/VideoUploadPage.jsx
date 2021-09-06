@@ -1,3 +1,4 @@
+import './style.css'
 import React, { useState, useCallback } from 'react';
 import { Typography, message, Form } from 'antd';
 import DropZone from './Sections/DropZone';
