@@ -86,8 +86,8 @@ const SingleComment = memo(({comment, videoId, delComment, history})=>{
         });
     },[videoId, replyTo]);
     
-    const updateButton = currentUserId === writer._id ? <span className='update' onClick={updateCommentOpen}>수정</span> : null;
-    const deleteButton = currentUserId === writer._id ? <span className='del' onClick={deleteComment}>삭제</span> : null;
+    const updateButton = currentUserId === writer._id ? <span className='btn ic-update' onClick={updateCommentOpen}>수정</span> : null;
+    const deleteButton = currentUserId === writer._id ? <span className='btn ic-del' onClick={deleteComment}>삭제</span> : null;
     const actions = [<LikeDislike commentId={replyTo} userId={currentUserId} history={history} />, <span onClick={onClickReplyFormOpen} key='comment-basic-reply-to'>Reply to</span>, updateButton, deleteButton];
     return(
         <div className='singleComment'>

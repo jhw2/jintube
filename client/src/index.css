@@ -44,7 +44,7 @@ input.error {
 .mb10{margin-bottom: 10px;}
 .mb15{margin-bottom: 15px;}
 .mb20{margin-bottom: 20px;}
-label{font-weight: 500;}
+label{font-weight: 500;line-height: normal;}
 select{height: 28px;border-color: #d9d9d9;border-radius: 2px;padding: 4px;}
 select + select{margin-left: 5px;}
 i{margin-right: 1px;}

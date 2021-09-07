@@ -35,3 +35,6 @@ video{width: 100%;}
 .comment-list .ant-comment-actions{margin-top: 6px;margin-bottom: 0;}
 .commentNum{padding-left: 42px;cursor: pointer;font-size: 13px;margin-top: -10px;}
 
+.comment-list .btn{display: inline-block;vertical-align: middle;background-color: #fff;padding: 1px 3px;margin-right: 5px;font-size: 11px;border: 1px solid #ccc;border-radius: 2px;}
+.comment-list .btn.ic-update{padding-left: 16px;background: #fff url('../../../img/ic-btn-modify.svg') no-repeat left 3px center / 11px;}
+.comment-list .btn.ic-del{padding-left: 16px;background: #fff url('../../../img/ic-btn-trash.svg') no-repeat left 3px center / 10px;}
