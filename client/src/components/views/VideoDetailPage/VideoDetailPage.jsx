@@ -13,8 +13,8 @@ const VideoDetailPage = (props)=>{
     const [videoDetail, setVideoDetail] = useState({}); 
     const [CommentList, setCommentList] = useState([]); 
     const { title, description, filepath, writer } = videoDetail;
-
-    const subscribeBtn = <Subscribe history={props.history} userTo={writer && writer._id} userFrom={localStorage.getItem('userId')}  />;
+    
+    const subscribeBtn = localStorage.getItem('userId') === writer?._id ? '' : <Subscribe history={props.history} userTo={writer?._id} userFrom={localStorage.getItem('userId')}  />;
     
     const refresh = (comment)=>{
         const newComment = [...CommentList, ...comment];
