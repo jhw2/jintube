@@ -3,6 +3,7 @@ const router = express.Router();
 const { Video } = require("../models/Video");
 
 const multer = require('multer');
+const path = require('path');
 let ffmpeg = require('fluent-ffmpeg');
 
 
@@ -15,16 +16,17 @@ let storage = multer.diskStorage({
     },
     filename: (req, file, cb)=>{
         cb(null, `${Date.now()}_${file.originalname}`);
-    },
-    fileFilter: (req, file, cb)=>{
-        const ext = path.extname(file.originalname);
-        if(text != 'mp4'){
-            return cb(res.statuis(400).end('only mp4 is allowed', false));
-        }
-        cb(null, true);
-    },
+    }
 });
-const upload = multer({ storage: storage}).single('file');
+
+const fileFilter = (req, file, cb)=>{
+    const ext = path.extname(file.originalname);
+    if(ext !== '.mp4'){
+        return cb('mp4동영상만 업로드 가능합니다.', false);
+    }
+    cb(null, true);
+}
+const upload = multer({ storage, fileFilter }).single('file');
 
 router.post("/uploadfiles", (req, res) => {
     upload(req, res, err =>{

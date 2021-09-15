@@ -16,13 +16,14 @@ const DropZone = memo(({setFilePath, thumbFilePath, setThumbFilePath, setFileDur
         VideoApi.uploadFile(formData).then(response =>{
             const {data} = response;
             if(!data.success){
-                alert('업로드 실패');
+                alert('업로드 실패 '+ data.err);
+                setLoading(false);
+                return false;
             }
             const {url, filename} = data;
             setFilePath(filename);
             VideoApi.getThumbnail({url, filename}).then(response=>{
                 const {data} = response;
-                console.log()
                 if(!data.success){
                     alert('썸네일 생성 실패');
                     setLoading(false);
