@@ -6,6 +6,10 @@ const videoSchema = Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: 'User',
    },
+   createdAt: {
+       type: Date,
+       default : Date.now
+   },
    title: {
        type: String,
        maxlength: 50

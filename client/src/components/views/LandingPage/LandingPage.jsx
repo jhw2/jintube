@@ -28,7 +28,7 @@ const LandingPage = () => {
                     <div className='txt'>
                         <a href={url}><Meta avatar={ <Avatar src={writer.image} /> } title={title} description={description} /></a>
                         <p className='nm'><a href={url}>{writer.name}</a></p>
-                        <p className='views'><a href={url}><span>조회: {views} · {moment(createdAt).format('MMM Do YY')}</span></a></p>
+                        <p className='views'><a href={url}><span>조회: {views} · {moment(createdAt).format('YYYY-MM-DD')}</span></a></p>
                     </div>
                 </Col>
             )

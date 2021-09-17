@@ -10,6 +10,7 @@ video{width: 100%;}
 .sideVideo li .txt h6{font-size: 14px;font-weight: 500;color: #222;}
 
 .ant-list-item .ant-list-item-meta-description{font-size: 12px;line-height: 1;}
+.ant-list-item + .views{padding-left: 47px;margin-top: -7px;font-size: 13px;}
 
 /* 구독버튼 */
 .subscribe{cursor: pointer;background-color: #cc0000;color: #fff;padding: 7px 10px;border-radius: 4px;border: 0;box-sizing: border-box;width: 120px;}

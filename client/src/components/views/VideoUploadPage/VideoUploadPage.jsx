@@ -74,8 +74,8 @@ const VideoUploadPage = (props)=>{
                 <UploadDesc onChangeInput={onChangeInput}></UploadDesc>
 
                 <div className='mb10'>
-                    <Select onChangeInput={onChangeInput} options={privateOptions} defaultValue={0} name='privacy'></Select>
-                    <Select onChangeInput={onChangeInput} options={categoryOptions} defaultValue={"Film & Animation"} name='category'></Select>
+                    <Select onChangeInput={onChangeInput} options={privateOptions} defaultValue={1} name='privacy'></Select>
+                    <Select onChangeInput={onChangeInput} options={categoryOptions} defaultValue={2} name='category'></Select>
                 </div>
 
                 <input type='submit' value='업로드' className='ant-btn ant-btn-primary ant-btn-lg' />

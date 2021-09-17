@@ -16,5 +16,8 @@ class FileUpload {
   getVideoDetail(videoId) {
     return http.post('/getVideoDetail', videoId);
   }
+  updateViews(videoId) {
+    return http.post('/updateViews', videoId);
+  }
 }
 export default new FileUpload();

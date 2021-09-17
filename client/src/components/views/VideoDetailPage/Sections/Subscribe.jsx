@@ -33,7 +33,6 @@ const Subscribe = memo( ({history, userTo, userFrom})=>{
     },[subscribed, subscribeCount, userTo, userFrom, history])
 
     useEffect(()=>{
-        console.log(userTo, userFrom)
         SubscribeApi.getSubscribeCount({userTo}).then(response=>{
             if(!response.data.success){
                 alert('구독수 조회 실패');
