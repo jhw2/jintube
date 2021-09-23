@@ -50,7 +50,7 @@ router.post("/thumbnail", (req, res) => {
     }).on('error', (err)=>{
         return res.json({success: false, err}) 
     }).screenshot({
-        count: 3,
+        count: 1,
         folder: 'uploads/thumbnails',
         size: '320x200',
         filename: "thumbnail-%b.png",
