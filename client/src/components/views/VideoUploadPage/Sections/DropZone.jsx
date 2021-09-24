@@ -1,6 +1,7 @@
 import React, { memo, useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Icon } from 'antd';
+import { SERVER_URL } from '../../../Config';
 import VideoApi from '../../../../http/VideoApi';
 import Loading from './Loading';
 
@@ -46,7 +47,7 @@ const DropZone = memo(({setFilePath, thumbFilePath, setThumbFilePath, setFileDur
                 <Icon type='plus' />
             </div>
             <div>
-                <img src={`http://localhost:5000/${thumbFilePath}`} alt='' />                    
+                <img src={SERVER_URL+thumbFilePath} alt='' />                    
             </div>
         </div>
     )

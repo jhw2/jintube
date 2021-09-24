@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { SERVER_URL } from '../../../Config';
 import VideoApi from '../../../../http/VideoApi';
 
 const SideVideo = ({videoId})=>{
@@ -16,7 +17,7 @@ const SideVideo = ({videoId})=>{
                     return (
                         <li key={filepath}>
                             <div className='img'>
-                                <a href={url}><img src={'http://localhost:5000/'+thumbnail} alt='' /></a>
+                                <a href={url}><img src={SERVER_URL+thumbnail} alt='' /></a>
                                 <div className='duration'>
                                     <span>{minutes} : {seconds}</span>
                                 </div>

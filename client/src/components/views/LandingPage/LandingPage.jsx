@@ -1,6 +1,7 @@
 import './style.css';
 import React, { useEffect, useState } from 'react';
 import { Typography, Row, Col, Card, Avatar } from 'antd';
+import { SERVER_URL } from '../../Config';
 import VideoApi from '../../../http/VideoApi';
 import moment from 'moment';
 
@@ -22,7 +23,7 @@ const LandingPage = () => {
             cardList.push(
                 <Col className='thumbnail' lg={6} md={8} xs={24} key={filepath}>
                     <p className='img-wrap'>
-                        <a href={url}><img src={`http://localhost:5000/${thumbnail}`} alt={title} /></a>
+                        <a href={url}><img src={SERVER_URL + thumbnail} alt={title} /></a>
                         <span className='duration'>{minutes} : {seconds}</span>
                     </p>
                     <div className='txt'>

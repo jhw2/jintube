@@ -1,5 +1,6 @@
 import './style.css';
 import React, { useCallback, useEffect, useState } from 'react';
+import { SERVER_URL } from '../../Config';
 import moment from 'moment';
 import { Row, Col, Avatar, List } from 'antd';
 import SideVideo from './Sections/SideVideo';
@@ -66,7 +67,7 @@ const VideoDetailPage = (props)=>{
         <Row gutter={[16, 16]}>
             <Col lg={18} xs={24}>
                 <div>
-                    <video src={filepath && 'http://localhost:5000/uploads/'+filepath} type="video/mp4" onPlay={updateViews} onEnded={onEnded} controls/>
+                    <video src={filepath && `${SERVER_URL}uploads/${filepath}`} type="video/mp4" onPlay={updateViews} onEnded={onEnded} controls/>
                 </div>
                 <div>   
                    
