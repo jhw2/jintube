@@ -5,7 +5,6 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 1000px
 }
 
 code {
@@ -54,3 +53,6 @@ i{margin-right: 1px;}
 
 .footer{height: 55px;display:flex;flex-direction: column; align-items: center;justify-content: center;font-size:1rem;border-top: 1px solid #eee;}
 
+@media (max-width: 768px) {
+  .cont{padding: 70px 15px 20px;}
+}

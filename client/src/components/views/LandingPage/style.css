@@ -1,3 +1,4 @@
+h2 select{font-size: 14px;margin-left: 15px;}
 .thumbnail .img-wrap{position: relative;padding-top: 62.5%;margin-bottom: 0;box-shadow: 3px 0px 4cxcpx rgb(0, 0, 0, 0.1);}
 .thumbnail .img-wrap img{position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
 .thumbnail .img-wrap .duration{max-width: 100%;position: absolute;bottom:0;right: 0;background-color: rgb(0, 0, 0, 0.6);padding: 3px 6px;color: #fff;font-size: 12px;}
