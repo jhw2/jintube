@@ -67,8 +67,14 @@ router.post("/uploadVideo", (req, res) => {
 });
 
 
-router.get("/getVideos", (req, res) => {
-    Video.find().populate('writer').exec((err, videos)=>{
+router.get("/getVideos/:type", (req, res) => {
+    let videoFind = Video.find().populate('writer').sort({createdAt: -1});
+    if(req.params.type === 'old'){
+        videoFind = Video.find().populate('writer').sort({createdAt: 1});
+    }else if(req.params.type === 'popular'){
+        videoFind = Video.find().populate('writer').sort({views: -1});
+    }
+    videoFind.exec((err, videos)=>{
         if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true, videos});
     });

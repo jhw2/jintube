@@ -10,18 +10,16 @@ const { Meta } = Card;
 const zeroFill = (num)=>{
     return Number(num) < 10 ? '0'+num : num;
 }
-let originalVideoData;
-
-const quickSort = (arr)=>{
-    if(arr.length < 2){
-        return arr;
-    }
-    const pivot = arr[Math.floor(arr.length / 2)];
-    const left = quickSort(arr.filter(data => data.views < pivot.views));
-    const center = arr.filter(data => data.views === pivot.views);
-    const right = quickSort(arr.filter(data => data.views > pivot.views));
-    return right.concat(center).concat(left);
-}
+// const quickSort = (arr)=>{
+//     if(arr.length < 2){
+//         return arr;
+//     }
+//     const pivot = arr[Math.floor(arr.length / 2)];
+//     const left = quickSort(arr.filter(data => data.views < pivot.views));
+//     const center = arr.filter(data => data.views === pivot.views);
+//     const right = quickSort(arr.filter(data => data.views > pivot.views));
+//     return right.concat(center).concat(left);
+// }
 const LandingPage = () => {
     const [renderCard, setRenderCard] = useState('');
 
@@ -49,34 +47,23 @@ const LandingPage = () => {
         setRenderCard(cardList);
     }, []);
 
-    const changeOrder = useCallback(({target})=>{
-        const orderType = target.value;
-        switch(orderType){
-            case 'new' :
-                drawCard(originalVideoData);
-                break;
-            case 'old' :
-                const newData = [...originalVideoData];
-                drawCard(newData.reverse());
-                break;
-            case 'poppular' :
-                drawCard(quickSort(originalVideoData));
-                break;
-            default: ;
-        }
-
-    }, [drawCard]);
-
-    useEffect(()=>{
-        VideoApi.getVideos().then(response=>{
+    const getVideos = useCallback((type)=>{
+        VideoApi.getVideos(type).then(response=>{
             if(!response.data.success){
                 alert('데이터 조회 실패');
                 return false;
             }
-            originalVideoData = response.data.videos.reverse();
-            drawCard(originalVideoData);
+            drawCard(response.data.videos);
         });
-    }, [drawCard]);
+    }, [drawCard]); 
+
+    const changeOrder = useCallback(({target})=>{
+        getVideos(target.value);
+    }, [getVideos]);
+
+    useEffect(()=>{
+        getVideos('new')
+    }, [getVideos]);
 
     
     return (
@@ -86,7 +73,7 @@ const LandingPage = () => {
                 <select onChange={changeOrder}>
                     <option value='new'>최신순</option>
                     <option value='old'>오래된순</option>
-                    <option value='poppular'>인기순</option>
+                    <option value='popular'>인기순</option>
                 </select>
             </Title>
             <Row gutter={[32, 16]}>
