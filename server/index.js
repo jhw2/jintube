@@ -7,7 +7,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
-const deleteVideoSchd = require("./scheduler/deleteVideo.js");
+const deleteVideoSchd = require("./scheduler/deleteVideo");
+
+const { logger } = require('./logger/logger');
 
 
 // const mongoose = require("mongoose");
@@ -18,7 +20,6 @@ const deleteVideoSchd = require("./scheduler/deleteVideo.js");
 
 //비디오 삭제 스케줄러
 deleteVideoSchd.start();
-
 
 const mongoose = require("mongoose");
 const connect = mongoose.connect(config.mongoURI,
