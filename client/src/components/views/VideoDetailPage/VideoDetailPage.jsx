@@ -5,6 +5,7 @@ import moment from 'moment';
 import { Row, Col, Avatar, List } from 'antd';
 import SideVideo from './Sections/SideVideo';
 import Subscribe from './Sections/Subscribe';
+import DeleteBtn from './Sections/DeleteBtn';
 import Comment from './Sections/Comment';
 import LikeDislike from './Sections/LikeDislike';
 import VideoApi from '../../../http/VideoApi';
@@ -18,7 +19,7 @@ const VideoDetailPage = (props)=>{
     const { title, description, filepath, writer, createdAt } = videoDetail;
     const [views, setViews] = useState();
     
-    const subscribeBtn = localStorage.getItem('userId') === writer?._id ? '' : <Subscribe history={props.history} userTo={writer?._id} userFrom={localStorage.getItem('userId')}  />;
+    const rightBtn = localStorage.getItem('userId') === writer?._id ? <DeleteBtn history={props.history} videoId={videoId} /> : <Subscribe history={props.history} userTo={writer?._id} userFrom={localStorage.getItem('userId')}  />;
     
     const updateViews = useCallback((e)=>{
         if(!playOn){
@@ -71,7 +72,7 @@ const VideoDetailPage = (props)=>{
                 </div>
                 <div>   
                    
-                    <List.Item actions={[<LikeDislike videoId={videoId} userId={localStorage.getItem('userId')} history={props.history} />, subscribeBtn]} >
+                    <List.Item actions={[<LikeDislike videoId={videoId} userId={localStorage.getItem('userId')} history={props.history} />, rightBtn]} >
                         <List.Item.Meta avatar={ writer && <Avatar src={writer.image} /> } title={title} description={description} />
                     </List.Item>
                     <p className='views'><span>조회: {views} · {moment(createdAt).format('YYYY-MM-DD')}</span></p>

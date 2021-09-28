@@ -16,6 +16,9 @@ class FileUpload {
   getVideoDetail(videoId) {
     return http.post('/getVideoDetail', videoId);
   }
+  deleteVideo(videoId) {
+    return http.post('/deleteVideo', videoId);
+  }
   updateViews(videoId) {
     return http.post('/updateViews', videoId);
   }

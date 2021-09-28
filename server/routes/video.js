@@ -68,11 +68,11 @@ router.post("/uploadVideo", (req, res) => {
 
 
 router.get("/getVideos/:type", (req, res) => {
-    let videoFind = Video.find().populate('writer').sort({createdAt: -1});
+    let videoFind = Video.find({'onDelete': false}).populate('writer').sort({createdAt: -1});
     if(req.params.type === 'old'){
-        videoFind = Video.find().populate('writer').sort({createdAt: 1});
+        videoFind = Video.find({'onDelete': false}).populate('writer').sort({createdAt: 1});
     }else if(req.params.type === 'popular'){
-        videoFind = Video.find().populate('writer').sort({views: -1});
+        videoFind = Video.find({'onDelete': false}).populate('writer').sort({views: -1});
     }
     videoFind.exec((err, videos)=>{
         if(err) return res.status(400).json({success: false, err});
@@ -85,6 +85,14 @@ router.post("/getVideoDetail", (req, res) => {
         if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true, videoDetail});
     });
+});
+
+router.post("/deleteVideo", (req, res) => {
+    Video.findOneAndUpdate({"_id": req.body.videoId}, { onDelete: true} ).exec((err)=>{
+        if(err) return res.status(400).json({success: false, err});
+        res.status(200).json({success: true});
+    });
+
 });
 
 router.post("/updateViews", (req, res) => {

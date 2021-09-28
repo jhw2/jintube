@@ -25,7 +25,8 @@ const SideVideo = ({videoId})=>{
                             <div className='txt'>
                                 <h6><a href={url} >{title}</a></h6>
                                 <p><a href={url}>{writer.name}</a></p>
-                                <p><a href={url}><span>{views} - {moment(createdAt).format('MMM Do YY')}</span></a></p>
+                                <p><a href={url}><span>{moment(createdAt).format('YYYY-MM-DD')}</span></a></p>
+                                <p><a href={url}><span>조회수: {views}</span></a></p>
                             </div>
                         </li>
                     )

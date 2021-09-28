@@ -35,7 +35,11 @@ const videoSchema = Schema({
     },
     thumbnail: {
         type: String
-    }
+    },
+    onDelete: {
+        type: Boolean,
+        default : false
+    },
 }, { timestamp: true });
 
 
