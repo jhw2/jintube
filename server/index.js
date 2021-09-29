@@ -7,18 +7,14 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
+
 const deleteVideoSchd = require("./scheduler/deleteVideo");
+const deleteTempVideoSchd = require("./scheduler/deleteTempVideo");
 
-const { logger } = require('./logger/logger');
 
-
-// const mongoose = require("mongoose");
-// mongoose
-//   .connect(config.mongoURI, { useNewUrlParser: true })
-//   .then(() => console.log("DB connected"))
-//   .catch(err => console.error(err));
-
-//비디오 삭제 스케줄러
+//비디오 업로드시 임시 저장된 파일 삭제 처리 스케줄러
+deleteTempVideoSchd.start();
+//onDelete true로 표시된 비디오 리스트 삭제 처리 스케줄러
 deleteVideoSchd.start();
 
 const mongoose = require("mongoose");

@@ -16,10 +16,9 @@ const VideoDetailPage = (props)=>{
     const videoId = props.match.params.videoId;
     const [videoDetail, setVideoDetail] = useState({}); 
     const [CommentList, setCommentList] = useState([]); 
-    const { title, description, filepath, writer, createdAt } = videoDetail;
     const [views, setViews] = useState();
     
-    const rightBtn = localStorage.getItem('userId') === writer?._id ? <DeleteBtn history={props.history} videoId={videoId} /> : <Subscribe history={props.history} userTo={writer?._id} userFrom={localStorage.getItem('userId')}  />;
+    const rightBtn = localStorage.getItem('userId') === videoDetail?.writer?._id ? <DeleteBtn history={props.history} videoId={videoId} /> : <Subscribe history={props.history} userTo={videoDetail?.writer?._id} userFrom={localStorage.getItem('userId')}  />;
     
     const updateViews = useCallback((e)=>{
         if(!playOn){
@@ -53,7 +52,7 @@ const VideoDetailPage = (props)=>{
                 return false;
             }
             setVideoDetail(response.data.videoDetail);
-            setViews(response.data.videoDetail.views);
+            setViews(response.data?.videoDetail?.views);
         });
         CommentApi.getComment({postId: videoId}).then(response=>{
             if(!response.data.success){
@@ -64,20 +63,23 @@ const VideoDetailPage = (props)=>{
         }); 
     },[videoId]);
 
+    if(!videoDetail || videoDetail && Object.keys(videoDetail).length === 0){
+        return '';
+    }
     return(
         <Row gutter={[16, 16]}>
             <Col lg={18} xs={24}>
                 <div>
-                    <video src={filepath && `${SERVER_URL}uploads/${filepath}`} type="video/mp4" onPlay={updateViews} onEnded={onEnded} controls/>
+                    <video src={`${SERVER_URL}uploads/${videoDetail?.filepath}`} type="video/mp4" onPlay={updateViews} onEnded={onEnded} controls/>
                 </div>
                 <div>   
                    
                     <List.Item actions={[<LikeDislike videoId={videoId} userId={localStorage.getItem('userId')} history={props.history} />, rightBtn]} >
-                        <List.Item.Meta avatar={ writer && <Avatar src={writer.image} /> } title={title} description={description} />
+                        <List.Item.Meta avatar={ <Avatar src={videoDetail?.writer.image} /> } title={videoDetail.title} description={videoDetail.description} />
                     </List.Item>
-                    <p className='views'><span>조회: {views} · {moment(createdAt).format('YYYY-MM-DD')}</span></p>
+                    <p className='views'><span>조회: {views} · {moment(videoDetail.createdAt).format('YYYY-MM-DD')}</span></p>
 
-                    <Comment CommentList={CommentList} videoId={videoId} refresh={refresh} delComment={delComment} history={props.history} />
+                    <Comment CommentList={CommentList} videoId={videoDetail.videoId} refresh={refresh} delComment={delComment} history={props.history} />
                     
                 </div>
             </Col>

@@ -56,9 +56,11 @@ const VideoUploadPage = (props)=>{
                 setTimeout(()=>{props.history.push('/')}, 2000)
                 
             }else{
-                alert('업로드실패')
+                alert('업로드실패 ' + response.data.err)
             }
-        });
+        }).catch(err=>{
+            alert('업로드실패')
+        });;
     },[user, filePath, fileDuration, props.history, thumbFilePath])
 
     return(

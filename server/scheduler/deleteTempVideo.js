@@ -1,17 +1,17 @@
 const schedule = require('node-schedule');
-const { Video } = require("../models/Video");
+const { TempVideo } = require("../models/TempVideo");
 const fs = require("fs");
 const { logger } = require('../logger/logger');
 
 /** 
- * onDelete true로 표시된 비디오 리스트 삭제 처리 스케줄러
+ * 비디오 업로드시 임시 저장된 파일 삭제 처리 스케줄(하루 한번)
  */
 module.exports ={
     start : ()=>{ 
-        const job = schedule.scheduleJob({hour: 16, minute: 47}, ()=>{ 
-            logger.info('=============== FLAG VIDEO DELETE START ================');
+        const job = schedule.scheduleJob({hour: 16, minute: 49}, ()=>{ 
+            logger.info('=============== TEMP VIDEO DELETE START ================');
     
-            Video.find({"onDelete": true}).exec((err, videos)=>{
+            TempVideo.find({ 'expiryDate': {'$lte': new Date()} }).exec((err, videos)=>{
                 if (err) logger.error(err);
                 //파일삭제
                 videos.forEach( async (video) => {
@@ -25,9 +25,9 @@ module.exports ={
                         }
                     ));
                     //db삭제
-                    Video.findOneAndDelete({"_id": _id}).exec((err, doc)=>{
+                    TempVideo.findOneAndDelete({"_id": _id}).exec((err, doc)=>{
                         if (err) logger.error(err);
-                        logger.info(`${video.title} was deleted.`);
+                        logger.info(`${video.filepath} was deleted.`);
                     });
                 });
             });

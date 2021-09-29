@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { Video } = require("../models/Video");
+const { TempVideo } = require("../models/TempVideo");
 
 const multer = require('multer');
 const path = require('path');
 let ffmpeg = require('fluent-ffmpeg');
+const { logger } = require('../logger/logger');
 
 
 //=================================
@@ -39,6 +41,7 @@ router.post("/uploadfiles", (req, res) => {
 
 router.post("/thumbnail", (req, res) => {
     let filePath = "", fileDuration = "";
+
     ffmpeg.ffprobe(req.body.url, (err, metadata)=>{
         fileDuration = metadata.format.duration;  
     }) 
@@ -46,7 +49,14 @@ router.post("/thumbnail", (req, res) => {
     ffmpeg(req.body.url).on('filenames', (filenames)=>{
         filePath = 'uploads/thumbnails/' + filenames[0];
     }).on('end', ()=>{
-        return res.json({success: true, url: filePath, fileDuration: fileDuration})
+
+        //업로드 된 동영상 및 썸네일 이미지 임시 db 저장
+        const tempVideo = new TempVideo({'filepath': req.body.url.replace('uploads\\', ''), 'thumbnail': filePath});
+        tempVideo.save((err, doc)=>{
+            if(err) logger.error(err);
+        });
+
+        return res.json({success: true, url: filePath, fileDuration: fileDuration});
     }).on('error', (err)=>{
         return res.json({success: false, err}) 
     }).screenshot({
@@ -55,15 +65,25 @@ router.post("/thumbnail", (req, res) => {
         folder: 'uploads/thumbnails',
         size: '320x200',
         filename: "thumbnail-%b.png",
-    }) 
+    });
+
 });
 
 router.post("/uploadVideo", (req, res) => {
     const video = new Video(req.body);
-    video.save((err, doc)=>{
+
+    TempVideo.findOneAndDelete({ 'filepath': req.body.filepath }, (err, doc)=>{//업로드된 임시 비디오 db 삭제 
         if(err) return res.status(400).json({success: false, err});
-        res.status(200).json({success: true});
-    });
+
+        if(doc === null){
+            return res.status(200).json({success: false, err: '동영상을 다시 업로드해주세요.'});
+        }
+
+        video.save((err, doc)=>{
+            if(err) return res.status(400).json({success: false, err});
+            res.status(200).json({success: true});
+        });
+    })
 });
 
 
@@ -81,7 +101,7 @@ router.get("/getVideos/:type", (req, res) => {
 });
 
 router.post("/getVideoDetail", (req, res) => {
-    Video.findOne({"_id": req.body.videoId}).populate('writer').exec((err, videoDetail)=>{
+    Video.findOne({"_id": req.body.videoId, 'onDelete': false}).populate('writer').exec((err, videoDetail)=>{
         if(err) return res.status(400).json({success: false, err});
         res.status(200).json({success: true, videoDetail});
     });
