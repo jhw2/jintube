@@ -1,6 +1,7 @@
   
 import axios from "axios";
+import { SERVER_URL } from '../components/Config.js';
 
 export default axios.create({
-  baseURL: "http://localhost:5000/api/subscribe",
+  baseURL: SERVER_URL+"api/subscribe",
 }); 

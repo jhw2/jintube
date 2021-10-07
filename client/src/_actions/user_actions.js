@@ -8,7 +8,7 @@ import {
 import { USER_SERVER } from '../components/Config.js';
 
 export const registerUser = (dataToSubmit)=>{
-    const request = axios.post(`http://localhost:5000${USER_SERVER}/register`,dataToSubmit)
+    const request = axios.post(`http://localhost:5000/api/users/register`,dataToSubmit, { withCredentials: true })
         .then(response => response.data);
     
     return {
@@ -18,7 +18,7 @@ export const registerUser = (dataToSubmit)=>{
 }
 
 export const loginUser = (dataToSubmit)=>{
-    const request = axios.post(`http://localhost:5000${USER_SERVER}/login`,dataToSubmit)
+    const request = axios.post(`http://localhost:5000/api/users/login`,dataToSubmit, { withCredentials: true })
                 .then(response => response.data);
 
     return {
@@ -28,7 +28,7 @@ export const loginUser = (dataToSubmit)=>{
 }
 
 export const auth = ()=>{
-    const request = axios.get(`http://localhost:5000${USER_SERVER}/auth`)
+    const request = axios.get(`http://localhost:5000/api/users/auth`, { withCredentials: true })
     .then(response => response.data);
 
     return {
@@ -38,7 +38,7 @@ export const auth = ()=>{
 }
 
 export const logoutUser = ()=>{
-    const request = axios.get(`http://localhost:5000${USER_SERVER}/logout`)
+    const request = axios.get(`http://localhost:5000/api/users/logout`, { withCredentials: true })
     .then(response => response.data);
 
     return {
