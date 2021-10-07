@@ -2,5 +2,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "/api/comment",
+  baseURL: "http://localhost:5000/api/comment",
 }); 
