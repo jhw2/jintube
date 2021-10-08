@@ -52,10 +52,10 @@ router.post("/login", (req, res) => {
                 const expiryDate = new Date( Date.now() + 60 * 60 * 1000 * 24);// 쿠키 하루동안 저장
                 res.cookie("w_authExp", user.tokenExp);
                 res
-                    .cookie("w_auth", user.token, {expires: expiryDate}) 
+                    .cookie("w_auth", user.token, {expires: expiryDate, sameSite: 'none', secure: true})//서로다른 도메인간 쿠키 저장시 sameSite 지정 필수
                     .status(200)
                     .json({
-                        loginSuccess: true, userId: user._id
+                        loginSuccess: true, userId: user._id, token: user.token
                     });
             });
         });
