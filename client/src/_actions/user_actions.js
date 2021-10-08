@@ -8,7 +8,7 @@ import {
 import { USER_SERVER, SERVER_URL } from '../components/Config.js';
 
 export const registerUser = (dataToSubmit)=>{
-    const request = axios.post(`${SERVER_URL}${USER_SERVER}/register`,dataToSubmit, { withCredentials: true })
+    const request = axios.post(`${SERVER_URL}${USER_SERVER}/register`, { withCredentials: true })
         .then(response => response.data);
     
     return {

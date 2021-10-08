@@ -4,6 +4,8 @@ const { User } = require("../models/User");
 
 const { auth } = require("../middleware/auth");
 
+const { logger } = require('../logger/logger');
+
 //=================================
 //             User
 //=================================
@@ -50,7 +52,7 @@ router.post("/login", (req, res) => {
                 const expiryDate = new Date( Date.now() + 60 * 60 * 1000 * 24);// 쿠키 하루동안 저장
                 res.cookie("w_authExp", user.tokenExp);
                 res
-                    .cookie("w_auth", user.token, {domain: 'http:localhost:5000', expires: expiryDate})
+                    .cookie("w_auth", user.token, {expires: expiryDate}) 
                     .status(200)
                     .json({
                         loginSuccess: true, userId: user._id
@@ -62,7 +64,7 @@ router.post("/login", (req, res) => {
 
 router.get("/logout", auth, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
-        if (err) return res.json({ success: false, err });
+        if (err){ logger.error(err); return res.json({ success: false, err })};
         return res.status(200).send({
             success: true
         });

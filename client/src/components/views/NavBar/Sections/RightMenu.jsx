@@ -2,16 +2,14 @@
 import React from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
-import { USER_SERVER } from '../../../Config';
+import { USER_SERVER, SERVER_URL } from '../../../Config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 const RightMenu = (props)=> {
   const user = useSelector(state => state.user);
-  console.log(user.userData, user.userData && !user.userData.isAuth)
-
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}logout`).then(response => {
+    axios.get(`${SERVER_URL}${USER_SERVER}/logout`, { withCredentials: true }).then(response => {
       if (response.status === 200) {
         localStorage.removeItem('userId');
         props.history.push("/login");
