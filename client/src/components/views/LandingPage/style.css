@@ -1,8 +1,10 @@
+h2.ant-typography, .ant-typography h2{letter-spacing: -0.5pxs;}
 h2 select{font-size: 14px;margin-left: 15px;}
 .thumbnail .img-wrap{position: relative;padding-top: 62.5%;margin-bottom: 0;box-shadow: 3px 0px 4cxcpx rgb(0, 0, 0, 0.1);}
 .thumbnail .img-wrap img{position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
 .thumbnail .img-wrap .duration{max-width: 100%;position: absolute;bottom:0;right: 0;background-color: rgb(0, 0, 0, 0.6);padding: 3px 6px;color: #fff;font-size: 12px;}
+.thumbnail .ant-card-meta-title{font-weight: 400;color: #333;}
 .thumbnail .ant-card-meta-detail > .ant-card-meta-description{margin-top: -8px;font-size: 12px;}
-.thumbnail .nm{margin-top: -8px;font-size: 11px;}
-.thumbnail .views{margin-top: -15px;font-size: 13px;padding-left: 47px;}
+.thumbnail .nm{margin-top: -8px;font-size: 11px;color: #555;font-weight: 200;}
+.thumbnail .views{margin-top: -15px;font-size: 13px;padding-left: 47px;font-weight: 200;color: #666;}
 .thumbnail .txt{background-color: #fff;padding: 15px 10px 1px;box-shadow: 2px 2px 5px 0px rgb(0 0 0 / 10%);}
