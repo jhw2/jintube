@@ -3,25 +3,19 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Typography, Row, Col, Card, Avatar } from 'antd';
 import { SERVER_URL } from '../../Config';
 import VideoApi from '../../../http/VideoApi';
+import Loading from '../VideoUploadPage/Sections/Loading';
+
 import moment from 'moment';
 
 const { Title } = Typography;
 const { Meta } = Card;
 const zeroFill = (num)=>{
-    return Number(num) < 10 ? '0'+num : num;
+    return Number(num) < 10 ? '0' + num : num;
 }
-// const quickSort = (arr)=>{
-//     if(arr.length < 2){
-//         return arr;
-//     }
-//     const pivot = arr[Math.floor(arr.length / 2)];
-//     const left = quickSort(arr.filter(data => data.views < pivot.views));
-//     const center = arr.filter(data => data.views === pivot.views);
-//     const right = quickSort(arr.filter(data => data.views > pivot.views));
-//     return right.concat(center).concat(left);
-// }
+
 const LandingPage = () => {
     const [renderCard, setRenderCard] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const drawCard = useCallback((cards)=>{
         const cardList = [];
@@ -48,12 +42,14 @@ const LandingPage = () => {
     }, []);
 
     const getVideos = useCallback((type)=>{
+        setLoading(true);
         VideoApi.getVideos(type).then(response=>{
             if(!response.data.success){
                 alert('데이터 조회 실패');
                 return false;
             }
             drawCard(response.data.videos);
+            setLoading(false);
         });
     }, [drawCard]); 
 
@@ -68,6 +64,7 @@ const LandingPage = () => {
     
     return (
         <div>
+            <Loading isVisible={loading} />
             <Title level={2}>
                 Recommended 
                 <select onChange={changeOrder}>
