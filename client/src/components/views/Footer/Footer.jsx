@@ -4,7 +4,7 @@ import {Icon} from 'antd';
 const Footer = ()=>{
     return (
         <div className='footer'>
-           <p> Happy Coding  <Icon type="smile" /></p>
+           Copyright ⓒ 2021 jintube. All rights reserved.
         </div>
     )
 }
