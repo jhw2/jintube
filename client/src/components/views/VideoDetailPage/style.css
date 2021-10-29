@@ -1,6 +1,7 @@
 video{width: 100%;}
 
 .ant-list-item-meta-title{font-size: 18px;margin-bottom: 7px;}
+.videoWrap{background-color: #000;}
 
 /* 추천비디오 목록 */
 .sideVideo{padding: 0;}

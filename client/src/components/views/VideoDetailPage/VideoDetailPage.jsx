@@ -69,7 +69,7 @@ const VideoDetailPage = (props)=>{
     return(
         <Row gutter={[16, 16]}>
             <Col lg={18} xs={24}>
-                <div>
+                <div className='videoWrap'>
                     <video src={`${SERVER_URL}uploads/${videoDetail?.filepath}`} type="video/mp4" onPlay={updateViews} onEnded={onEnded} controls/>
                 </div>
                 <div>   

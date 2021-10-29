@@ -21,7 +21,7 @@ body a{color: inherit;}
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 190px);
 }
 
 input.error {
