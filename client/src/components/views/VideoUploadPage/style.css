@@ -4,3 +4,9 @@
 .dropZone input{max-width: 100%;}
 
 .required{color: #de3738;margin-top: -10px;}
+
+
+@media (max-width: 768px) {
+    .uploadForm{flex-direction: column;}
+    .required{margin-top: 0;}
+}
